@@ -1,0 +1,100 @@
+---
+// Escena 3: Juguetón - Gift scene
+---
+
+<section id="escena3" class="scene-section">
+  <div class="container">
+    <div class="comic-panel comic-panel--cyan">
+      <h2>🎁 ESCENA 3: MISIÓN DE RESCATE</h2>
+      <p>
+        Después de semejante paliza histórica, necesitaba algo para <strong>disimular mi derrota</strong><br>
+        y, sobre todo, para alegrarte el día.
+      </p>
+      <p>
+        <strong>Te confieso algo:</strong><br>
+        Mi plan original era llevarte el peluche antes de ir a los bolos, pero el tiempo me ganó horrible.
+      </p>
+      <p>
+        Al final, creo que <strong class="text-pink">fue el destino:</strong><br>
+        Fue mil veces mejor ver cómo tú misma escogías el que te gustaba.
+      </p>
+      <p class="highlight-text">
+        <em>
+          Esa sensación de verte feliz con tu elección y sacarte una sonrisa para esos "días malos",<br>
+          fue la mejor parte de la tarde.
+        </em> ❤️
+      </p>
+      
+      <div class="gift-image">
+        <img src="/images/gift.png" alt="El Peluche Escogido" />
+        <p class="image-caption">🧸 El regalo perfecto</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scene-section {
+    padding: var(--space-xxl) var(--space-lg);
+    background: var(--color-white);
+  }
+  
+  .scene-section:nth-child(even) {
+    background: linear-gradient(135deg, #FFF5F5 0%, #F5FFFF 100%);
+  }
+  
+  h2 {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  
+  .highlight-text {
+    background: linear-gradient(135deg, #FFE5E5, #E5F9FF);
+    border-left: 4px solid var(--color-pink);
+    padding: var(--space-md);
+    margin: var(--space-lg) 0;
+    font-style: italic;
+  }
+  
+  .gift-image {
+    text-align: center;
+    margin-top: var(--space-xl);
+  }
+  
+  .gift-image img {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    border: 4px solid var(--color-black);
+    box-shadow: var(--shadow-comic);
+    transform: rotate(-1deg);
+    transition: transform var(--transition-normal);
+  }
+  
+  .gift-image img:hover {
+    transform: rotate(1deg) scale(1.05);
+  }
+  
+  .image-caption {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    margin-top: var(--space-md);
+    color: var(--color-pink);
+    font-weight: 700;
+  }
+  
+  @media (max-width: 768px) {
+    .scene-section {
+      padding: var(--space-xl) var(--space-md);
+    }
+    
+    .gift-image img {
+      max-width: 100%;
+    }
+  }
+</style>

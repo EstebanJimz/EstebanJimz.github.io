@@ -1,0 +1,57 @@
+---
+import CTFChallenge from '../CTFChallenge.astro';
+import RaceGame from '../RaceGame.astro';
+---
+
+<section id="final" class="scene-section final-section">
+  <div class="container">
+    <div class="comic-panel comic-panel--pink">
+      <h2>🎯 EL FINAL DE TEMPORADA</h2>
+      <p>
+        <strong class="text-pink" style="font-size: 1.2em;">El 13 de Febrero:</strong><br>
+        Prepárate, porque la salida del 13 va a ser una mera chimba.
+      </p>
+      <p>
+        Mi misión es <strong>alegrarte el día</strong> y que la pasemos increíble<br>
+        <strong>ANTES</strong> de que llegue el 14 y empiecen a lloverte las flores y chocolates<br>
+        de todos tus culitos y pretendientes (que seguro tienes fila 😏).
+      </p>
+      <p class="text-cyan" style="font-style: italic;">
+        Yo prefiero adelantarme al caos y robarte las risas primero. 👾✨
+      </p>
+      <p>
+        <strong>Nos vemos para la revancha. Un abrazo, crack.</strong>
+      </p>
+    </div>
+    
+    <!-- CTF Challenge -->
+    <CTFChallenge />
+    
+    <!-- Race Game -->
+    <RaceGame />
+  </div>
+</section>
+
+<style>
+  .final-section {
+    padding: var(--space-xxl) var(--space-lg);
+    background: linear-gradient(135deg, #FFE5F5 0%, #E5FFFF 100%);
+  }
+  
+  h2 {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .final-section {
+      padding: var(--space-xl) var(--space-md);
+    }
+  }
+</style>
