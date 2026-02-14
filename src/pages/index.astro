@@ -1,0 +1,23 @@
+---
+import SpiderLayout from '../layouts/SpiderLayout.astro';
+import Hero from '../components/spider/Hero';
+import MemoryVerse from '../components/spider/MemoryVerse';
+import Mission from '../components/spider/Mission';
+import PeterFooter from '../components/spider/PeterFooter';
+---
+
+<SpiderLayout title="The Spider-Valentine Project | For Majo">
+	<main class="relative z-10 w-full overflow-hidden">
+		<!-- Section 1: Hero -->
+		<Hero client:load />
+
+		<!-- Section 2: Memories -->
+		<MemoryVerse client:visible />
+
+		<!-- Section 3: Mission Note -->
+		<Mission client:visible />
+
+		<!-- Section 4: Footer -->
+		<PeterFooter client:visible />
+	</main>
+</SpiderLayout>

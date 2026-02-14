@@ -1,0 +1,253 @@
+---
+// CTF Challenge Component
+---
+
+<div class="ctf-challenge">
+  <h3 style="text-align: center; font-size: 1.8em; margin-bottom: 1rem;">
+    🔐 DESAFÍO SECRETO
+  </h3>
+  <p style="text-align: center;">
+    <strong>Pero antes de que termine esto...</strong><br>
+    Demuestra que recuerdas el lugar clave de la Escena 3:
+  </p>
+  
+  <!-- Arcade Heart Icon -->
+  <div style="text-align:center; margin: 1.5rem 0;">
+    <div class="arcade-heart">❤️</div>
+  </div>
+  
+  <p style="font-size: 1.1em; text-align: center;">
+    <strong>Pregunta:</strong> ¿Dónde compramos el detalle?<br>
+    <small style="color: var(--color-gray);">
+      (Pista: Recuerda las <strong class="text-pink">2 veces</strong> que me ganaste en los carros 🏎️)
+    </small>
+  </p>
+  
+  <div class="console-input-group">
+    <input 
+      type="text" 
+      id="flagInput" 
+      placeholder="Escribe el lugar..." 
+      autocomplete="off"
+    />
+    <button id="ctf-btn" class="btn btn--cyan">
+      🔓 DESENCRIPTAR
+    </button>
+  </div>
+  
+  <div id="resultado"></div>
+</div>
+
+<style>
+  .ctf-challenge {
+    background: var(--color-white);
+    border: 5px dashed var(--color-pink);
+    padding: var(--space-xl);
+    margin-top: var(--space-xxl);
+  }
+  
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-pink);
+  }
+  
+  .arcade-heart {
+    font-size: 4rem;
+    animation: pulse-heart 2s infinite, rotate-slight 3s ease-in-out infinite;
+    display: inline-block;
+  }
+  
+  @keyframes pulse-heart {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+  
+  @keyframes rotate-slight {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  
+  .console-input-group {
+    max-width: 500px;
+    margin: var(--space-xl) auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  #flagInput {
+    padding: var(--space-md);
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  #resultado {
+    margin-top: var(--space-lg);
+    min-height: 50px;
+  }
+  
+  .console-success {
+    background: linear-gradient(135deg, #E5FFEF, #E5F9FF);
+    color: var(--color-cyan);
+    border: 2px solid var(--color-pink);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    animation: success-appear 0.5s ease;
+  }
+  
+  .console-success p {
+    margin: var(--space-sm) 0;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+  }
+  
+  .console-error {
+    color: var(--color-pink);
+    padding: var(--space-md);
+    text-align: center;
+    font-family: var(--font-body);
+  }
+  
+  @keyframes success-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .shake-animation {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+  }
+  
+  @media (max-width: 768px) {
+    .ctf-challenge {
+      padding: var(--space-lg);
+    }
+    
+    .arcade-heart {
+      font-size: 3rem;
+    }
+  }
+</style>
+
+<script>
+  // CTF Logic
+  const btn = document.getElementById('ctf-btn');
+  const input = document.getElementById('flagInput') as HTMLInputElement;
+  const resultado = document.getElementById('resultado');
+  
+  function validateFlag() {
+    if (!input || !resultado) return;
+    
+    const val = input.value
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Remove accents
+    
+    if (val === 'jugueton') {
+      // Play success sound (using Web Audio API)
+      playWinSound();
+      
+      // Show success message
+      resultado.innerHTML = `
+        <div class="console-success">
+          <p>> PASSWORD ACCEPTED.</p>
+          <p>> Eres mi Player 1 favorita.</p>
+          <p>> El 13 tengo varias sorpresas preparadas... 🎁</p>
+          <p>> Nos vemos pronto. ❤️🕷️</p>
+        </div>
+      `;
+      
+      // Trigger confetti
+      triggerConfetti();
+    } else {
+      // Play error sound
+      playErrorSound();
+      
+      resultado.innerHTML = `
+        <div class="console-error">
+          > ERROR: Lugar Incorrecto.<br>
+          > PISTA: Donde compramos el regalo.
+        </div>
+      `;
+      
+      // Shake animation
+      input.classList.add('shake-animation');
+      setTimeout(() => input.classList.remove('shake-animation'), 500);
+    }
+  }
+  
+  // Event listeners
+  btn?.addEventListener('click', validateFlag);
+  input?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') validateFlag();
+  });
+  
+  // Audio functions
+  function playWinSound() {
+    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    [500, 600, 800].forEach((freq, i) => {
+      setTimeout(() => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      }, i * 100);
+    });
+  }
+  
+  function playErrorSound() {
+    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.frequency.value = 100;
+    osc.type = 'sawtooth';
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.5);
+  }
+  
+  // Confetti effect
+  function triggerConfetti() {
+    const duration = 5000;
+    const interval = setInterval(() => {
+      const emoji = Math.random() > 0.5 ? '❤️' : '🏎️';
+      const element = document.createElement('div');
+      element.innerText = emoji;
+      element.style.position = 'fixed';
+      element.style.left = Math.random() * 100 + 'vw';
+      element.style.top = '105vh';
+      element.style.fontSize = Math.random() * 20 + 20 + 'px';
+      element.style.zIndex = '9999';
+      element.style.transition = 'top 3s linear';
+      element.style.pointerEvents = 'none';
+      document.body.appendChild(element);
+      
+      requestAnimationFrame(() => element.style.top = '-50px');
+      setTimeout(() => element.remove(), 3000);
+    }, 200);
+    
+    setTimeout(() => clearInterval(interval), duration);
+  }
+</script>
