@@ -1,0 +1,37 @@
+---
+import HackerLayout from '../layouts/HackerLayout.astro';
+import HeroTerminal from '../components/majo/HeroTerminal';
+import EventCanonical from '../components/majo/EventCanonical';
+import BattleArena from '../components/majo/BattleArena';
+import LootDrop from '../components/majo/LootDrop';
+import GlitchLog from '../components/majo/GlitchLog';
+import EncryptedPromise from '../components/majo/EncryptedPromise';
+import HackerFooter from '../components/majo/HackerFooter';
+---
+
+<HackerLayout title="PROJECT MAJO: RESCHEDULED MISSION">
+	<main class="relative z-10 w-full overflow-hidden min-h-screen">
+		
+		<!-- SECTION 1: HERO (EL ORIGEN DIGITAL) -->
+		<HeroTerminal client:load />
+
+		<!-- SECTION 2: EL ENCUENTRO (LA CHUPISA DE ISAAC) -->
+		<EventCanonical client:visible />
+
+		<!-- SECTION 3: LA BATALLA (BOLOS & ARCADE) -->
+		<BattleArena client:visible />
+
+		<!-- SECTION 4: EL LOOT Y LA RECARGA (JUGUETÓN & 21 PICK COFFEE) -->
+		<LootDrop client:visible />
+
+		<!-- SECTION 5: EL GLITCH TEMPORAL (POR QUÉ NO SALIMOS EL 13) -->
+		<GlitchLog client:visible />
+
+		<!-- SECTION 6: LA PROMESA (NEXT MISSION) -->
+		<EncryptedPromise client:visible />
+
+		<!-- SECTION 7: FOOTER (LA FIRMA) -->
+		<HackerFooter client:visible />
+
+	</main>
+</HackerLayout>
