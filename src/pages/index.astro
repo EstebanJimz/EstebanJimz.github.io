@@ -1,0 +1,26 @@
+---
+import SpiderLayout from '../layouts/SpiderLayout.astro';
+import Hero from '../components/spider/Hero';
+import StoryTimeline from '../components/story/StoryTimeline';
+// import PeterFooter from '../components/spider/PeterFooter'; // Consolidated into story flow or kept as credits
+---
+
+<SpiderLayout title="The Spider-Verse Love Story | V2.0">
+	<main class="relative z-10 w-full overflow-hidden bg-black min-h-screen">
+		
+		<!-- 1. The Intro: Spider-Sense -->
+		<Hero client:load />
+
+		<!-- 2. The Narrative: Comic Book Timeline -->
+		<section class="relative z-20">
+			<StoryTimeline client:visible />
+		</section>
+
+		<!-- Footer / Credits -->
+		<footer class="py-12 text-center text-gray-600 font-mono text-xs">
+			<p>DEVELOPED WITH ❤️, CODE & WEB FLUID.</p>
+			<p>© 2026 SPIDER-VERSE ED.</p>
+		</footer>
+
+	</main>
+</SpiderLayout>
